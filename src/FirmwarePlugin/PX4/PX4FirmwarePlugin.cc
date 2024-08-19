@@ -50,6 +50,8 @@ PX4FirmwarePlugin::PX4FirmwarePlugin()
     , _followMeFlightMode   (tr("Follow Me"))
     , _simpleFlightMode     (tr("Simple"))
     , _orbitFlightMode      (tr("Orbit"))
+    , _thrustersPosCtlFlightMode    (tr("Thrusters Position"))
+    , _thrustersOffboardFlightMode  (tr("Thrusters Offboard"))
 {
     qmlRegisterType<PX4SimpleFlightModesController>     ("QGroundControl.Controllers", 1, 0, "PX4SimpleFlightModesController");
     qmlRegisterType<AirframeComponentController>        ("QGroundControl.Controllers", 1, 0, "AirframeComponentController");
@@ -84,6 +86,8 @@ PX4FirmwarePlugin::PX4FirmwarePlugin()
         { PX4_CUSTOM_MAIN_MODE_AUTO,        PX4_CUSTOM_SUB_MODE_AUTO_READY,         false,  true,   true },
         { PX4_CUSTOM_MAIN_MODE_AUTO,        PX4_CUSTOM_SUB_MODE_AUTO_RTGS,          false,  true,   true },
         { PX4_CUSTOM_MAIN_MODE_AUTO,        PX4_CUSTOM_SUB_MODE_AUTO_TAKEOFF,       false,  true,   true },
+        { PX4_CUSTOM_MAIN_MODE_THRUSTERS,   PX4_CUSTOM_SUB_MODE_THRUSTERS_POSCTL,    true,   false, true },
+        { PX4_CUSTOM_MAIN_MODE_THRUSTERS,   PX4_CUSTOM_SUB_MODE_THRUSTERS_OFFBOARD,  true,   false,  true },
     };
 
     // Must be in same order as above structure
@@ -106,6 +110,9 @@ PX4FirmwarePlugin::PX4FirmwarePlugin()
         &_readyFlightMode,
         &_rtgsFlightMode,
         &_takeoffFlightMode,
+        &_thrustersPosCtlFlightMode,
+        &_thrustersOffboardFlightMode,
+        
     };
 
     // Convert static information to dynamic list. This allows for plugin override class to manipulate list.
